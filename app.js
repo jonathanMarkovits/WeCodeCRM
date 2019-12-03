@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 const {getHomePage, getStage1, getStage2, getStage3, getStage4, getStage5} = require('./routes/index');
-const {addPlayerPage, addPlayer, deletePlayer, editPlayer, editPlayerPage} = require('./routes/player');
+const {addCandidatePage, addCandidate, deleteCandidate, editCandidate, editCandidatePage} = require('./routes/candidate');
 const port = 5000;
 
 // create connection to database
@@ -43,11 +43,11 @@ app.get('/stage2', getStage2);
 app.get('/stage3', getStage3);
 app.get('/stage4', getStage4);
 app.get('/stage5', getStage5);
-app.get('/add', addPlayerPage);
-app.get('/edit/:id/:stage', editPlayerPage);
-app.get('/delete/:id', deletePlayer);
-app.post('/add', addPlayer);
-app.post('/edit/:id/:stage', editPlayer);
+app.get('/add', addCandidatePage);
+app.get('/edit/:id/:stage', editCandidatePage);
+app.get('/delete/:id/:stage', deleteCandidate);
+app.post('/add', addCandidate);
+app.post('/edit/:id/:stage', editCandidate);
 
 // set the app to listen on the port
 app.listen(port, () => {

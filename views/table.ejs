@@ -24,8 +24,8 @@
                             <td><%= candidate.stage %></td>
                             <td>@<%= candidate.user_name %></td>
                             <td>
-                                <a href="/edit/<%= candidate.id %>/<%= candidate.stage %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/delete/<%= candidate.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/edit/<%= candidate.id %>/<%= candidate.stage %>" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/delete/<%= candidate.id %>/<%= candidate.stage %>" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
