@@ -1,7 +1,9 @@
-    <div align='center'>
-        <a href="/stage1" class="btn btn-primary">Stage 1</a>
-        <a href="/stage2" class="btn btn-primary">Stage 2</a>
-        <a href="/stage3" class="btn btn-primary">Stage 3</a>
-        <a href="/stage4" class="btn btn-primary">Stage 4</a>
-        <a href="/stage5" class="btn btn-primary">Stage 5</a>
+<div align='center'>
+    <div class="btn-group">
+        <a href="/stage1" class="<%= stage === 1 ? 'btn btn-primary disabled' : 'btn btn-primary' %>">Stage 1</a>
+        <a href="/stage2" class="<%= stage === 2 ? 'btn btn-primary disabled' : 'btn btn-primary' %>">Stage 2</a>
+        <a href="/stage3" class="<%= stage === 3 ? 'btn btn-primary disabled' : 'btn btn-primary' %>">Stage 3</a>
+        <a href="/stage4" class="<%= stage === 4 ? 'btn btn-primary disabled' : 'btn btn-primary' %>">Stage 4</a>
+        <a href="/stage5" class="<%= stage === 5 ? 'btn btn-primary disabled' : 'btn btn-primary' %>">Stage 5</a>
     </div>
+</div>

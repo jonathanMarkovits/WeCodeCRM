@@ -1,6 +1,9 @@
 module.exports = {
     getHomePage: (req, res) => {
-        res.render('index.ejs', { title: "Welcome" });
+        res.render('index.ejs', { 
+            title: "Welcome",
+            stage: 0
+        });
     },
 
     getStage1: (req, res) => {
@@ -12,8 +15,9 @@ module.exports = {
                 res.redirect('/');
             }
             res.render('table.ejs', {
-                title: "Welcome to Socka",
-                candidates: result
+                title: "WeCode",
+                candidates: result,
+                stage: 1
             });
         });
     },
@@ -27,8 +31,9 @@ module.exports = {
                 res.redirect('/');
             }
             res.render('table.ejs', {
-                title: "Welcome to Socka",
-                candidates: result
+                title: "WeCode",
+                candidates: result,
+                stage: 2
             });
         });
     },
@@ -42,8 +47,9 @@ module.exports = {
                 res.redirect('/');
             }
             res.render('table.ejs', {
-                title: "Welcome to Socka",
-                candidates: result
+                title: "WeCode",
+                candidates: result,
+                stage: 3
             });
         });
     },
@@ -57,8 +63,9 @@ module.exports = {
                 res.redirect('/');
             }
             res.render('table.ejs', {
-                title: "Welcome to Socka",
-                candidates: result
+                title: "WeCode",
+                candidates: result,
+                stage: 4
             });
         });
     },
@@ -72,8 +79,9 @@ module.exports = {
                 res.redirect('/');
             }
             res.render('table.ejs', {
-                title: "Welcome to Socka",
-                candidates: result
+                title: "WeCode",
+                candidates: result,
+                stage: 5
             });
         });
     }

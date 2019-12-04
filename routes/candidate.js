@@ -58,7 +58,7 @@ module.exports = {
             }
             res.render('edit-candidate.ejs', {
                 title: "Edit  Candidate",
-                player: result[0],
+                candidate: result[0],
                 message: ''
             });
         });
@@ -69,48 +69,47 @@ module.exports = {
         let currentStage = req.params.stage;
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
-        let newStage = req.body.new_stage;
+        let newStage = req.body.new_stage[req.body.new_stage.length - 1];
 
         if (currentStage === newStage) {
             let query = "UPDATE `stage" + currentStage + "` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "' WHERE `stage" + currentStage + "`.`id` = '" + candidateId + "'";
             db.query(query, (err, result) => {
                 if (err) {
-                    // return res.status(500).send(err);
+                    return res.status(500).send(err);
                 }
-                // res.redirect('/');
+                return res.redirect('/');
             });
         } else {
-            let username = req.body.username;
-            let getImageQuery = 'SELECT image from `stage' + currentStage + '` WHERE id = "' + candidateId + '"';
+            let getUserInfoQuery = 'SELECT image, user_name from `stage' + currentStage + '` WHERE id = "' + candidateId + '"';
             let deleteUserQuery = 'DELETE FROM stage' + currentStage + ' WHERE id = "' + candidateId + '"';
 
-            db.query(getImageQuery, (err, result) => {
-                if (err) {
-                    // return res.status(500).send(err);
-                }
-
-                let image = result[0].image;
-
-                // send the player's details to the database
-                let query = "INSERT INTO `stage" + newStage + "` (first_name, last_name, stage, image, user_name) VALUES ('" +
-                    first_name + "', '" + last_name + "', '" + newStage + "', '" + image + "', '" + username + "')";
-                db.query(query, (err, result) => {
-                    if (err) {
-                        // return res.status(500).send(err);
-                    }
-                    // res.redirect('/');
-                });
-            });
-
-            db.query(deleteUserQuery, (err, result) => {
+            db.query(getUserInfoQuery, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                res.redirect('/');
+
+                let image = result[0].image;
+                let username = result[0].user_name;
+
+                // send the candidate's details to the database
+                let insertUserQuery = "INSERT INTO `stage" + newStage + "` (first_name, last_name, stage, image, user_name) VALUES ('" +
+                    first_name + "', '" + last_name + "', '" + newStage + "', '" + image + "', '" + username + "')";
+                db.query(insertUserQuery, (err, result) => {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }
+
+                    db.query(deleteUserQuery, (err, result) => {
+                        if (err) {
+                            return res.status(500).send(err);
+                        }
+                        return res.redirect('/');
+                    });
+                });
             });
         }
     },
-    
+
     deleteCandidate: (req, res) => {
         let playerId = req.params.id;
         let stage = req.params.stage;
