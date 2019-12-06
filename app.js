@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -7,6 +8,7 @@ const app = express();
 
 const {getHomePage, getStage1, getStage2, getStage3, getStage4, getStage5} = require('./routes/index');
 const {addCandidatePage, addCandidate, deleteCandidate, editCandidate, editCandidatePage} = require('./routes/candidate');
+const {getLoginPage, login} = require('./routes/login');
 const port = 5000;
 
 // create connection to database
@@ -35,6 +37,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 app.use(fileUpload()); // configure fileupload
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 // routes for the app
 app.get('/', getHomePage);
@@ -46,6 +53,8 @@ app.get('/stage5', getStage5);
 app.get('/add', addCandidatePage);
 app.get('/edit/:id/:stage', editCandidatePage);
 app.get('/delete/:id/:stage', deleteCandidate);
+app.get('/login', getLoginPage);
+app.post('/login', login);
 app.post('/add', addCandidate);
 app.post('/edit/:id/:stage', editCandidate);
 

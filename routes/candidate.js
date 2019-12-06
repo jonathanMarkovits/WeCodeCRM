@@ -2,6 +2,8 @@ const fs = require('fs');
 
 module.exports = {
     addCandidatePage: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
+
         res.render('add-candidate.ejs', {
             title: "Welcome to WeCode CRM",
             message: ''
@@ -41,7 +43,7 @@ module.exports = {
             });
         } else {
             message = "Invalid File format. Only 'gif', 'jpeg' and 'png' images are allowed.";
-            res.render('add-player.ejs', {
+            res.render('add-candidate.ejs', {
                 message,
                 title: "Welcome to Socka | Add a new player"
             });
@@ -52,10 +54,13 @@ module.exports = {
         let candidateId = req.params.id;
         let candidateStage = req.params.stage;
         let query = "SELECT * FROM `stage" + candidateStage + "` WHERE id = '" + candidateId + "' ";
+        
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
+
+            if (!req.session.loggedin) return res.redirect('/login');
             res.render('edit-candidate.ejs', {
                 title: "Edit  Candidate",
                 candidate: result[0],

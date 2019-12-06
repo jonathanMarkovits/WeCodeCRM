@@ -1,14 +1,17 @@
 module.exports = {
     getHomePage: (req, res) => {
-        res.render('index.ejs', { 
+        if (!req.session.loggedin) return res.redirect('/login');
+
+        res.render('index.ejs', {
             title: "Welcome",
             stage: 0
         });
     },
 
     getStage1: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
         let query = "SELECT * FROM `stage1` ORDER BY id ASC"; // query database to get all the players
-        
+
         // execute query
         db.query(query, (err, result) => {
             if (err) {
@@ -23,8 +26,9 @@ module.exports = {
     },
 
     getStage2: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
         let query = "SELECT * FROM `stage2` ORDER BY id ASC"; // query database to get all the players
-        
+
         // execute query
         db.query(query, (err, result) => {
             if (err) {
@@ -39,8 +43,9 @@ module.exports = {
     },
 
     getStage3: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
         let query = "SELECT * FROM `stage3` ORDER BY id ASC"; // query database to get all the players
-        
+
         // execute query
         db.query(query, (err, result) => {
             if (err) {
@@ -55,8 +60,9 @@ module.exports = {
     },
 
     getStage4: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
         let query = "SELECT * FROM `stage4` ORDER BY id ASC"; // query database to get all the players
-        
+
         // execute query
         db.query(query, (err, result) => {
             if (err) {
@@ -71,8 +77,9 @@ module.exports = {
     },
 
     getStage5: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
         let query = "SELECT * FROM `stage5` ORDER BY id ASC"; // query database to get all the players
-        
+
         // execute query
         db.query(query, (err, result) => {
             if (err) {
