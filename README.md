@@ -1,12 +1,29 @@
 # WeCodeCRM
 Building a CRM app for WeCode
 
-# useful links
-https://dev.to/achowba/build-a-simple-app-using-node-js-and-mysql-19me
-https://codeshack.io/basic-login-system-nodejs-express-mysql/
-https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp
+## Useful links
+* Basic web app: https://dev.to/achowba/build-a-simple-app-using-node-js-and-mysql-19me
+* Login page: https://codeshack.io/basic-login-system-nodejs-express-mysql/
+* CSS classes: https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp
 
-# mySql queries for initializing the DB
+## Fields for the DB tables
+* stage 1 - create candidates - ID/ first name/ last name/ mail/ gender/ rank(0,1,2)/ birthdate/ phone number/ address/ text field
+* stage 2 - phone interview - does pass/ comments
+* stage 3 - home exam - does send/ does submited/ deadline/ comments
+* stage 4 - selection day - time to arrive/ does arrive/ docs/ comments/ grades for 4 tests/ final grade
+* stage 5 - interview - date and time/ is the candidate updated/ comments/ docs
+
+## TDL
+* option for login page
+* all the tables in the DB should contain all fields from the section above
+* show only the information that relevant to the current stage and the next stage (in 'personal file' page)
+* show only the fields of stage 1 (in the section above) in the 'table' pages.
+* in the 'home' page, show more information like how many candidates in each stage.
+* a feature to export information to PDF.
+* a feature to send SMS (for a reminder).
+* an option to sort the table by field.
+
+## mySql queries for initializing the DB
 
 CREATE DATABASE IF NOT EXISTS wecode;
 
