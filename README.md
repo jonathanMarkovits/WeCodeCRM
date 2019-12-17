@@ -104,4 +104,4 @@ VALUES
 INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
 
 ALTER TABLE candidates
-  ADD COLUMN "is_rejected" BOOLEAN NOT NULL DEFAULT FALSE;
+  ADD COLUMN `is_rejected` BOOLEAN NOT NULL DEFAULT FALSE;
