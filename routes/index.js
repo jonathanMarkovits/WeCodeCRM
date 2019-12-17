@@ -5,26 +5,26 @@ module.exports = {
         //counting all candidates from all stages
         let query1 = "SELECT * FROM stage1";
         let query2 = "SELECT * FROM stage2";
-        let query3 = "SELECT * FROM stage2";    
+        let query3 = "SELECT * FROM stage2";
         let query4 = "SELECT * FROM stage2";
         let query5 = "SELECT * FROM stage2";
-        db.query(query1, (err, results1) =>{
-            if(err)
+        db.query(query1, (err, results1) => {
+            if (err)
                 res.redirect('/');
-            db.query(query2,  (err, results2) =>{
-                if(err)
+            db.query(query2, (err, results2) => {
+                if (err)
                     res.redirect('/');
-                db.query(query3,  (err, results3) =>{
-                    if(err)
+                db.query(query3, (err, results3) => {
+                    if (err)
                         res.redirect('/');
-                        db.query(query4,  (err, results4) =>{
-                            if(err)
+                    db.query(query4, (err, results4) => {
+                        if (err)
+                            res.redirect('/');
+                        db.query(query5, (err, results5) => {
+                            if (err)
                                 res.redirect('/');
-                                db.query(query5,  (err, results5) =>{
-                                    if(err)
-                                        res.redirect('/');
-                                
-                                res.render('index.ejs', {
+
+                            res.render('index.ejs', {
                                 title: "Welcome",
                                 stage: 0,
                                 r1: results1.length,
@@ -32,17 +32,17 @@ module.exports = {
                                 r3: results3.length,
                                 r4: results4.length,
                                 r5: results5.length
-                                });
-                                 });
+                            });
                         });
+                    });
                 });
             });
         });
- },
+    },
 
     getStage1: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage1` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE STAGE = 1 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -59,7 +59,7 @@ module.exports = {
 
     getStage2: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage2` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE STAGE = 2 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -76,7 +76,7 @@ module.exports = {
 
     getStage3: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage3` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE STAGE = 3 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -93,7 +93,7 @@ module.exports = {
 
     getStage4: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage4` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE STAGE = 4 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -110,7 +110,7 @@ module.exports = {
 
     getStage5: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage5` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE STAGE = 5 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {

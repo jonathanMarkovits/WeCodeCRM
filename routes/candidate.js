@@ -11,50 +11,27 @@ module.exports = {
     },
 
     addCandidate: (req, res) => {
-        if (!req.files) {
-            return res.status(400).send("No files were uploaded.");
-        }
-
         let message = '';
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
         let stage = 1;
-        let username = req.body.username;
-        let uploadedFile = req.files.image;
-        let image_name = uploadedFile.name;
-        let fileExtension = uploadedFile.mimetype.split('/')[1];
-        image_name = username + '.' + fileExtension;
 
-        if (uploadedFile.mimetype === 'image/png' || uploadedFile.mimetype === 'image/jpeg' || uploadedFile.mimetype === 'image/gif') {
-            // upload the file to the /public/assets/img directory
-            uploadedFile.mv(`public/assets/img/${image_name}`, (err) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                // send the player's details to the database
-                let query = "INSERT INTO `stage1` (first_name, last_name, stage, image, user_name) VALUES ('" +
-                    first_name + "', '" + last_name + "', '" + stage + "', '" + image_name + "', '" + username + "')";
-                db.query(query, (err, result) => {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                    res.redirect('/');
-                });
-            });
-        } else {
-            message = "Invalid File format. Only 'gif', 'jpeg' and 'png' images are allowed.";
-            res.render('add-candidate.ejs', {
-                message,
-                title: "Welcome to Socka | Add a new player"
-            });
-        }
+        // send the player's details to the database
+        let query = "INSERT INTO `candidates` (first_name, last_name, stage) VALUES ('" +
+            first_name + "', '" + last_name + "', '" + stage + "')";
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.redirect('/');
+        });
     },
 
     editCandidatePage: (req, res) => {
         let candidateId = req.params.id;
-        let candidateStage = req.params.stage;
-        let query = "SELECT * FROM `stage" + candidateStage + "` WHERE id = '" + candidateId + "' ";
-        
+        //let candidateStage = req.params.stage;
+        let query = "SELECT * FROM `candidates` WHERE serial_number = '" + candidateId + "'";
+
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -71,74 +48,38 @@ module.exports = {
 
     editCandidate: (req, res) => {
         let candidateId = req.params.id;
-        let currentStage = req.params.stage;
+        //let currentStage = req.params.stage;
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
         let newStage = req.body.new_stage[req.body.new_stage.length - 1];
+        //let query = "UPDATE `candidates` SET ";
 
-        if (currentStage === newStage) {
-            let query = "UPDATE `stage" + currentStage + "` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "' WHERE `stage" + currentStage + "`.`id` = '" + candidateId + "'";
-            db.query(query, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                return res.redirect('/');
-            });
-        } else {
-            let getUserInfoQuery = 'SELECT image, user_name from `stage' + currentStage + '` WHERE id = "' + candidateId + '"';
-            let deleteUserQuery = 'DELETE FROM stage' + currentStage + ' WHERE id = "' + candidateId + '"';
 
-            db.query(getUserInfoQuery, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
+        //let getUserInfoQuery = 'SELECT image, user_name from `stage' + currentStage + '` WHERE id = "' + candidateId + '"';
+        //let deleteUserQuery = 'DELETE FROM stage' + currentStage + ' WHERE id = "' + candidateId + '"';
 
-                let image = result[0].image;
-                let username = result[0].user_name;
 
-                // send the candidate's details to the database
-                let insertUserQuery = "INSERT INTO `stage" + newStage + "` (first_name, last_name, stage, image, user_name) VALUES ('" +
-                    first_name + "', '" + last_name + "', '" + newStage + "', '" + image + "', '" + username + "')";
-                db.query(insertUserQuery, (err, result) => {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-
-                    db.query(deleteUserQuery, (err, result) => {
-                        if (err) {
-                            return res.status(500).send(err);
-                        }
-                        return res.redirect('/');
-                    });
-                });
-            });
-        }
+        // send the candidate's details to the database
+        let insertUserQuery = "UPDATE `candidates` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "', `stage` = '" + newStage + "' WHERE `serial_number` = '" + candidateId + "'";
+        db.query(insertUserQuery, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.redirect('/');
+        });
     },
 
     deleteCandidate: (req, res) => {
         let playerId = req.params.id;
-        let stage = req.params.stage;
-        let getImageQuery = 'SELECT image from `stage' + stage + '` WHERE id = "' + playerId + '"';
-        let deleteUserQuery = 'DELETE FROM `stage' + stage + '` WHERE id = "' + playerId + '"';
+        //let stage = req.params.stage;
+        let deleteUserQuery = 'DELETE FROM `cadidates` WHERE serial_number = "' + playerId + '"';
 
-        db.query(getImageQuery, (err, result) => {
+
+        db.query(deleteUserQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-
-            let image = result[0].image;
-
-            fs.unlink(`public/assets/img/${image}`, (err) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                db.query(deleteUserQuery, (err, result) => {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                    res.redirect('/');
-                });
-            });
+            res.redirect('/');
         });
     }
 };
