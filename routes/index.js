@@ -3,13 +3,13 @@ module.exports = {
         if (!req.session.loggedin) return res.redirect('/login');
 
         //counting all candidates from all stages
-        let query1 = "SELECT * FROM stage1";
-        let query2 = "SELECT * FROM stage2";
-        let query3 = "SELECT * FROM stage2";
-        let query4 = "SELECT * FROM stage2";
-        let query5 = "SELECT * FROM stage2";
-        db.query(query1, (err, results1) => {
-            if (err)
+        let query1 = "SELECT * FROM candidates WHERE stage = 1";
+        let query2 = "SELECT * FROM candidates WHERE stage = 2";
+        let query3 = "SELECT * FROM candidates WHERE stage = 3";    
+        let query4 = "SELECT * FROM candidates WHERE stage = 4";
+        let query5 = "SELECT * FROM candidates WHERE stage = 5";
+        db.query(query1, (err, results1) =>{
+            if(err)
                 res.redirect('/');
             db.query(query2, (err, results2) => {
                 if (err)
