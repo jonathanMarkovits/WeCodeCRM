@@ -16,7 +16,7 @@ const port = 5000;
 const db = mysql.createConnection ({
     host: 'localhost',
     user: 'root',
-    password: 'Aa123456',
+    password: '',
     database: 'wecode'
 });
 
@@ -53,12 +53,12 @@ app.get('/stage5', getStage5);
 app.get('/rejectedwithpotential', getStage6);
 app.get('/rejected', getRejected);
 app.get('/add', addCandidatePage);
-app.get('/edit/:id/:stage', editCandidatePage);
-app.get('/delete/:id/:stage', deleteCandidate);
+app.get('/edit/:id', editCandidatePage);
+app.get('/delete/:id', deleteCandidate);
 app.get('/login', getLoginPage);
 app.post('/login', login);
 app.post('/add', addCandidate);
-app.post('/edit/:id/:stage', editCandidate);
+app.post('/edit/:id', editCandidate);
 
 // set the app to listen on the port
 app.listen(port, () => {
