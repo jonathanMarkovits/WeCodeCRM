@@ -13,6 +13,9 @@ Building a CRM app for WeCode
 * stage 4 - selection day - time to arrive/ does arrive/ docs/ comments/ grades for 4 tests/ final grade
 * stage 5 - interview - date and time/ is the candidate updated/ comments/ docs
 
+## node packages npm install command 
+* npm install express express-fileupload body-parser mysql ejs req-flash --save
+
 ## TDL
 * option for login page
 * all the tables in the DB should contain all fields from the section above
