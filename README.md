@@ -56,54 +56,33 @@ CREATE TABLE IF NOT EXISTS `documents` (
 
 CREATE DATABASE IF NOT EXISTS wecode;
 
-CREATE TABLE IF NOT EXISTS `stage1` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `candidates` (
+  `serial_number` int(5) NOT NULL AUTO_INCREMENT,
+  `stage` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `stage` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `user_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
-CREATE TABLE IF NOT EXISTS `stage2` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `stage` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `user_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
-CREATE TABLE IF NOT EXISTS `stage3` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `stage` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `user_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
-CREATE TABLE IF NOT EXISTS `stage4` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `stage` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `user_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
-CREATE TABLE IF NOT EXISTS `stage5` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `stage` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `user_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `mail` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `rank` int(11),
+  `birthdate` DATE NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `text` varchar(255),
+  `pass_stage2` BOOLEAN,
+  `send_stage3` BOOLEAN,
+  `submited_stage3` BOOLEAN,
+  `deadline_stage3` datetime,
+  `arriving_time_stage4` datetime,
+  `does_arrive_stage4` BOOLEAN,
+  `grade_test1_stage4` int(11),
+  `grade_test2_stage4` int(11),
+  `grade_test3_stage4` int(11),
+  `grade_test4_stage4` int(11),
+  `final_grade_stage4` int(11),
+  `interview_date_time_stage5` datetime,
+  `is_notified_stage5` BOOLEAN,
+  PRIMARY KEY (`serial_number`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
