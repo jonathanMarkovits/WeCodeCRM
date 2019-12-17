@@ -11,9 +11,13 @@ module.exports = {
     },
 
     addCandidate: (req, res) => {
-        let message = '';
+        //let message = '';
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
+        let mail = req.body.mail;
+        let gender = req.body.gender;
+        let birthdate = req.body.birthdate
+        let phone_number = req.body.phone_number;
         let stage = 1;
 
         // send the player's details to the database
@@ -52,12 +56,6 @@ module.exports = {
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
         let newStage = req.body.new_stage[req.body.new_stage.length - 1];
-        //let query = "UPDATE `candidates` SET ";
-
-
-        //let getUserInfoQuery = 'SELECT image, user_name from `stage' + currentStage + '` WHERE id = "' + candidateId + '"';
-        //let deleteUserQuery = 'DELETE FROM stage' + currentStage + ' WHERE id = "' + candidateId + '"';
-
 
         // send the candidate's details to the database
         let insertUserQuery = "UPDATE `candidates` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "', `stage` = '" + newStage + "' WHERE `serial_number` = '" + candidateId + "'";
@@ -72,7 +70,7 @@ module.exports = {
     deleteCandidate: (req, res) => {
         let playerId = req.params.id;
         //let stage = req.params.stage;
-        let deleteUserQuery = 'DELETE FROM `cadidates` WHERE serial_number = "' + playerId + '"';
+        let deleteUserQuery = 'DELETE FROM `candidates` WHERE serial_number = "' + playerId + '"';
 
 
         db.query(deleteUserQuery, (err, result) => {

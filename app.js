@@ -51,12 +51,12 @@ app.get('/stage3', getStage3);
 app.get('/stage4', getStage4);
 app.get('/stage5', getStage5);
 app.get('/add', addCandidatePage);
-app.get('/edit/:id/:stage', editCandidatePage);
-app.get('/delete/:id/:stage', deleteCandidate);
+app.get('/edit/:id', editCandidatePage);
+app.get('/delete/:id', deleteCandidate);
 app.get('/login', getLoginPage);
 app.post('/login', login);
 app.post('/add', addCandidate);
-app.post('/edit/:id/:stage', editCandidate);
+app.post('/edit/:id', editCandidate);
 
 // set the app to listen on the port
 app.listen(port, () => {
