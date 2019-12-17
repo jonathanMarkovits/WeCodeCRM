@@ -92,4 +92,16 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO `candidates` (stage, id, first_name, last_name, mail, gender) VALUES (1, 30808, `yoav`, `shotland`, `sh@sh.net`, `male`); 
+
+INSERT INTO `candidates` (stage, id, first_name, last_name, mail, gender, birthdate, phone_number, address)
+VALUES
+(1, 30808, 'yoav', 'shotland', 'sh@sh.net', 'male', 16/12/92, 050505050, 'kehilat varsha 1'),
+(1, 30808, 'roni', 'oron', 'rn@sh.net', 'female', 15/12/92, 051505050, 'kehilat varsha 2'),
+(1, 30808, 'jonathan', 'markovits', 'jo@sh.net', 'male', 14/12/92, 052505050, 'kehilat varsha 3'),
+(1, 30808, 'ben', 'bialick', 'ben@sh.net', 'female', 13/12/92, 053505050, 'kehilat varsha 4'),
+(1, 30808, 'shir', 'shasha', 'shir@sh.net', 'male', 12/12/92, 054505050, 'kehilat varsha 5'); 
+
+INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
+
+ALTER TABLE candidates
+  ADD COLUMN "is_rejected" BOOLEAN NOT NULL DEFAULT FALSE;

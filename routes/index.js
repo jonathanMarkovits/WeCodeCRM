@@ -3,11 +3,11 @@ module.exports = {
         if (!req.session.loggedin) return res.redirect('/login');
 
         //counting all candidates from all stages
-        let query1 = "SELECT * FROM stage1";
-        let query2 = "SELECT * FROM stage2";
-        let query3 = "SELECT * FROM stage2";    
-        let query4 = "SELECT * FROM stage2";
-        let query5 = "SELECT * FROM stage2";
+        let query1 = "SELECT * FROM candidates WHERE stage = 1";
+        let query2 = "SELECT * FROM candidates WHERE stage = 2";
+        let query3 = "SELECT * FROM candidates WHERE stage = 3";    
+        let query4 = "SELECT * FROM candidates WHERE stage = 4";
+        let query5 = "SELECT * FROM candidates WHERE stage = 5";
         db.query(query1, (err, results1) =>{
             if(err)
                 res.redirect('/');
@@ -42,7 +42,7 @@ module.exports = {
 
     getStage1: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage1` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE stage = 1 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -59,7 +59,7 @@ module.exports = {
 
     getStage2: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage2` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE stage = 2 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -76,7 +76,7 @@ module.exports = {
 
     getStage3: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage3` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE stage = 3 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -93,7 +93,7 @@ module.exports = {
 
     getStage4: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage4` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE stage = 4 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
@@ -110,7 +110,7 @@ module.exports = {
 
     getStage5: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
-        let query = "SELECT * FROM `stage5` ORDER BY id ASC"; // query database to get all the players
+        let query = "SELECT * FROM `candidates` WHERE stage = 5 ORDER BY id ASC"; // query database to get all the players
 
         // execute query
         db.query(query, (err, result) => {
