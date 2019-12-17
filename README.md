@@ -25,8 +25,34 @@ Building a CRM app for WeCode
 * a feature to export information to PDF.
 * a feature to send SMS (for a reminder).
 * an option to sort the table by field.
+* validting inputs for tables 
+* read about SQL engines
 
+## Remarks
+* file size is maximum 16MB
+* comments size is maximum 500 characters.
 ## mySql queries for initializing the DB
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `commentID` int(5) NOT NULL AUTO_INCREMENT,
+  `commentContent` varchar(500) NOT NULL,
+  `commentUser` varchar(100) NOT NULL,
+  `dateEntered` datetime NOT NULL,
+  `commentStage` int(11) NOT NULL,
+  `commentCandidate` varchar(100) NOT NULL,
+  PRIMARY KEY (`commentID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `documents` (
+  `docID` int(5) NOT NULL AUTO_INCREMENT,
+  `doc` mediumblob,
+  `docUser` varchar(100) NOT NULL,
+  `dateEntered` datetime NOT NULL,
+  `docStage` int(11) NOT NULL,
+  `docCandidate` varchar(100) NOT NULL,
+  PRIMARY KEY (`docID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
 
 CREATE DATABASE IF NOT EXISTS wecode;
 
