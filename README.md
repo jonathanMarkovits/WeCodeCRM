@@ -105,3 +105,18 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test'
 
 ALTER TABLE candidates
   ADD COLUMN `is_rejected` BOOLEAN NOT NULL DEFAULT FALSE;
+
+CREATE TABLE IF NOT EXISTS `rejected` (
+  `serial_number` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `birthdate` DATE NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+
+  PRIMARY KEY (`serial_number`)
+  
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
