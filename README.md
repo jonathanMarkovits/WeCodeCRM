@@ -33,28 +33,27 @@ Building a CRM app for WeCode
 * comments size is maximum 500 characters.
 ## mySql queries for initializing the DB
 
+CREATE DATABASE IF NOT EXISTS wecode;
+
 CREATE TABLE IF NOT EXISTS `comments` (
-  `commentID` int(5) NOT NULL AUTO_INCREMENT,
-  `commentContent` varchar(500) NOT NULL,
-  `commentUser` varchar(100) NOT NULL,
-  `dateEntered` datetime NOT NULL,
-  `commentStage` int(11) NOT NULL,
-  `commentCandidate` varchar(100) NOT NULL,
-  PRIMARY KEY (`commentID`)
+  `comment_id` int(5) NOT NULL AUTO_INCREMENT,
+  `comment_content` varchar(500) NOT NULL,
+  `comment_user` varchar(100) NOT NULL,
+  `date_entered` datetime NOT NULL,
+  `comment_stage` int(11) NOT NULL,
+  `comment_candidate` varchar(100) NOT NULL,
+  PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `documents` (
-  `docID` int(5) NOT NULL AUTO_INCREMENT,
+  `doc_id` int(5) NOT NULL AUTO_INCREMENT,
   `doc` mediumblob,
-  `docUser` varchar(100) NOT NULL,
-  `dateEntered` datetime NOT NULL,
-  `docStage` int(11) NOT NULL,
-  `docCandidate` varchar(100) NOT NULL,
-  PRIMARY KEY (`docID`)
+  `doc_user` varchar(100) NOT NULL,
+  `date_entered` datetime NOT NULL,
+  `doc_stage` int(11) NOT NULL,
+  `doc_candidate` varchar(100) NOT NULL,
+  PRIMARY KEY (`doc_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
-
-CREATE DATABASE IF NOT EXISTS wecode;
 
 CREATE TABLE IF NOT EXISTS `candidates` (
   `serial_number` int(5) NOT NULL AUTO_INCREMENT,
@@ -89,10 +88,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
-
-ALTER TABLE `accounts` ADD PRIMARY KEY (`id`);
-ALTER TABLE `accounts` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+INSERT INTO `candidates` (stage, id, first_name, last_name, mail, gender) VALUES (1, 30808, `yoav`, `shotland`, `sh@sh.net`, `male`); 
