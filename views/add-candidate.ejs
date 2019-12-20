@@ -3,13 +3,16 @@
         <% if (message != '') { %>
             <p class="text-center text-danger"><%= message %></p>
         <% } %>
-        <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
-            <div class="form-row">
+        <form class="add-playerform" action="" method="post" enctype="multipart/form-data">
+            <div class="form-col" align="center">
                 <div class="form-group col-md-4">
-                    <input type="text" class="form-control" name="first_name" id="first-name" placeholder="First Name" required>
+                    <input typ-e="text" class="form-control" name="first_name" id="first-name" placeholder="First Name" required>
                 </div>
                 <div class="form-group col-md-4">
                     <input type="text" class="form-control" name="last_name" id="last-name" placeholder="Last Name" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="id" id="id" placeholder="ID" required>
                 </div>
                 <div class="form-group col-md-4">
                     <input type="text" class="form-control" name="mail" id="mail" placeholder="Mail" required>
@@ -30,8 +33,10 @@
                 <div class="form-group col-md-4">
                     <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
                 </div>
+                <div class="form-group col-md-4">
+                    <button type="submit" class="btn btn-primary float-right">Add Candidate</button>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary float-right">Add Candidate</button>
         </form>
     </div>
 </div>

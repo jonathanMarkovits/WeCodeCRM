@@ -11,18 +11,19 @@ module.exports = {
     },
 
     addCandidate: (req, res) => {
-        //let message = '';
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
+        let id = req.body.id;
         let mail = req.body.mail;
         let gender = req.body.gender;
         let birthdate = req.body.birthdate
         let phone_number = req.body.phone_number;
+        let address = req.body.address;
         let stage = 1;
 
         // send the player's details to the database
-        let query = "INSERT INTO `candidates` (first_name, last_name, stage) VALUES ('" +
-            first_name + "', '" + last_name + "', '" + stage + "')";
+        let query = "INSERT INTO `candidates` (first_name, last_name, id, mail, gender, birthdate, phone_number, address, stage) VALUES ('" +
+            first_name + "', '" + last_name + "', '" + id + "', '" + mail + "', '" + gender + "', '" + birthdate + "', '" + phone_number + "', '" + address + "', '" + stage + "')";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -33,7 +34,6 @@ module.exports = {
 
     editCandidatePage: (req, res) => {
         let candidateId = req.params.id;
-        //let candidateStage = req.params.stage;
         let query = "SELECT * FROM `candidates` WHERE serial_number = '" + candidateId + "'";
 
         db.query(query, (err, result) => {
@@ -43,7 +43,7 @@ module.exports = {
 
             if (!req.session.loggedin) return res.redirect('/login');
             res.render('edit-candidate.ejs', {
-                title: "Edit  Candidate",
+                title: "Edit Candidate",
                 candidate: result[0],
                 message: ''
             });
@@ -51,14 +51,13 @@ module.exports = {
     },
 
     editCandidate: (req, res) => {
-        let candidateId = req.params.id;
-        //let currentStage = req.params.stage;
+        let candidateSerialNumber = req.params.id;
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
         let newStage = req.body.new_stage[req.body.new_stage.length - 1];
 
         // send the candidate's details to the database
-        let insertUserQuery = "UPDATE `candidates` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "', `stage` = '" + newStage + "' WHERE `serial_number` = '" + candidateId + "'";
+        let insertUserQuery = "UPDATE `candidates` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "', `stage` = '" + newStage + "' WHERE `serial_number` = '" + candidateSerialNumber + "'";
         db.query(insertUserQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -68,10 +67,8 @@ module.exports = {
     },
 
     deleteCandidate: (req, res) => {
-        let playerId = req.params.id;
-        //let stage = req.params.stage;
-        let deleteUserQuery = 'DELETE FROM `candidates` WHERE serial_number = "' + playerId + '"';
-
+        let candidateSerialNumber = req.params.id;
+        let deleteUserQuery = 'DELETE FROM `candidates` WHERE serial_number = "' + candidateSerialNumber + '"';
 
         db.query(deleteUserQuery, (err, result) => {
             if (err) {
