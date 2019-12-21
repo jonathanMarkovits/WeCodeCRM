@@ -13,8 +13,7 @@ module.exports = {
         db.query(query0, (err, results0) =>{
             if(err)
                 res.redirect('/');
-<<<<<<< HEAD
-                
+                   
             db.query(query1, (err, results1) =>{
                 if(err)
                     res.redirect('/');
@@ -47,31 +46,6 @@ module.exports = {
                                     })
                                 });
                             });
-=======
-            db.query(query2, (err, results2) => {
-                if (err)
-                    res.redirect('/');
-                db.query(query3, (err, results3) => {
-                    if (err)
-                        res.redirect('/');
-                    db.query(query4, (err, results4) => {
-                        if (err)
-                            res.redirect('/');
-                        db.query(query5, (err, results5) => {
-                            if (err)
-                                res.redirect('/');
-
-                            res.render('index.ejs', {
-                                title: "Welcome",
-                                stage: 0,
-                                r1: results1.length,
-                                r2: results2.length,
-                                r3: results3.length,
-                                r4: results4.length,
-                                r5: results5.length
-                            });
-                        });
->>>>>>> 2744a13ffa553aa1e5c82eb8b44b68769c1d6bac
                     });
                 });
             });
