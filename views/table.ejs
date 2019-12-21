@@ -6,22 +6,28 @@
             <table id = "table1" class="table table-hovered">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
-                        <th scope="col">Stage</th>
-                        <th scope="col">Username</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Address</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% candidates.forEach((candidate, index) => { %>
                         <tr>
-                            <th scope="row"><%= candidate.id %></th>
                             <td><%= candidate.first_name %></td>
                             <td><%= candidate.last_name %></td>
-                            <td><%= candidate.stage %></td>
-                            <td>@<%= candidate.user_name %></td>
+                            <td><%= candidate.id %></td>
+                            <td><%= candidate.male %></td>
+                            <td><%= candidate.gender %></td>
+                            <td><%= (new Date).getFullYear() - (new Date(candidate.birthdate)).getFullYear() %></td>
+                            <td><%= candidate.address %></td>
+                            <td><%= candidate.phone_number %></td>
                             <td>
                                 <a href="/edit/<%= candidate.serial_number %>" class="btn btn-sm btn-info">Personal File</a>
                             </td>

@@ -1,5 +1,5 @@
 <%- include('partials/header.ejs') %>
-<div class="container">
+<div class="containers">
     <% if (message) { %>
         <p class="text-center text-danger"><%= message %></p>
     <% } %>
@@ -11,28 +11,30 @@
                     <label for="first-name">First Name</label>
                     <input type="text" class="form-control" name="first_name" id="first-name" value="<%= candidate.first_name %>" required>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-gro<option value="6">rejected</option>up col-md-4">
                     <label for="last-name">Last Name</label>
                     <input type="text" class="form-control" name="last_name" id="last-name" value="<%= candidate.last_name %>" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" value="<%= candidate.user_name %>" required disabled title="Username cannot be edited.">
+                    <i<option value="6">rejected</option>nput type="text" class="form-control" name="username" id="username" value="<%= candidate.user_name %>" required disabled title="Username cannot be edited.">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="new-stage">Stage</label>
                     <select class="form-control" name="new_stage" id="new-stage" required>
-                        <option selected>current stage <%= candidate.stage %></option>
+                        <option disabled selected>current stage <%= candidate.stage %></option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
+                        <option value="6">rejected w
+                        <option value="7">rejected</option>
                     </select>
                 </div>
             </div>
             <button type="submit" class="btn btn-success float-right">Update Candidate</button>
-            <a href="/delete/<%= candidate.serial_number %>" class="btn btn btn-danger">Delete</a>
+            <a href="/deleteith potential</option>/<%= candidate.serial_number %>" class="btn btn btn-danger">Delete</a>
         </form>
     <% } else { %>
         <p class="text-center">Candidate Not Found. Go <a href="/add">here</a> to add candidates.</p>
