@@ -13,6 +13,7 @@ module.exports = {
     addCandidate: (req, res) => {
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
+        let full_name = first_name+" "+last_name;
         let id = req.body.id;
         let mail = req.body.mail;
         let gender = req.body.gender;
@@ -20,15 +21,21 @@ module.exports = {
         let phone_number = req.body.phone_number;
         let address = req.body.address;
         let stage = 1;
-
-        // send the player's details to the database
+        let file1 = req.files.file1;
+        let file2 = req.files.file2;
+        // send the candidate details to the database
         let query = "INSERT INTO `candidates` (first_name, last_name, id, mail, gender, birthdate, phone_number, address, stage) VALUES ('" +
             first_name + "', '" + last_name + "', '" + id + "', '" + mail + "', '" + gender + "', '" + birthdate + "', '" + phone_number + "', '" + address + "', '" + stage + "')";
+        let query2 = "INSERT INTO `documents` (doc, doc_user, date_entered, doc_stage, doc_candidate) VALUES ('" +file1 + "', '"+first_name+"', '" + birthdate + "', '" + stage + "','"+ full_name + "')";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/');
+            db.query(query2, (err, reesult)=>{
+                if(err) return res.status(500).send(err);  
+                res.redirect('/');
+     
+            });
         });
     },
 

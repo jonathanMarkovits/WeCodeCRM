@@ -17,7 +17,7 @@ Building a CRM app for WeCode
 * npm install express express-fileupload body-parser mysql ejs req-flash --save
 
 ## TDL
-* option for login page
+* option for login page - security imporvment needed
 * all the tables in the DB should contain all fields from the section above
 * show only the information that relevant to the current stage and the next stage (in 'personal file' page)
 * show only the fields of stage 1 (in the section above) in the 'table' pages.
@@ -27,6 +27,8 @@ Building a CRM app for WeCode
 * an option to sort the table by field.
 * validting inputs for tables 
 * read about SQL engines
+* add who is the user entering the data
+* delete doc_stage column
 
 ## Remarks
 * file size is maximum 16MB
