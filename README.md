@@ -29,6 +29,7 @@ Building a CRM app for WeCode
 * read about SQL engines
 * add who is the user entering the data
 * delete doc_stage column
+* consider deleting the documents table and save directly on server
 
 ## Remarks
 * file size is maximum 16MB
