@@ -12,6 +12,7 @@ module.exports = {
     },
 
     addCandidate: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
         let full_name = first_name+" "+last_name;
@@ -37,40 +38,55 @@ module.exports = {
         // send the candidate details to the database
         let query = "INSERT INTO `candidates` (first_name, last_name, id, mail, gender, birthdate, phone_number, address, stage) VALUES ('" +
             first_name + "', '" + last_name + "', '" + id + "', '" + mail + "', '" + gender + "', '" + birthdate + "', '" + phone_number + "', '" + address + "', '" + stage + "')";
-        //let query2 = "INSERT INTO `documents` (doc, doc_user, date_entered, doc_stage, doc_candidate) VALUES ('" +file1 + "', '"+first_name+"', '" + birthdate + "', '" + stage + "','"+ full_name + "')";
-        db.query(query, (err, result) => {
+    db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/');
+            if(req.files) {
+                let query2 = "INSERT INTO `documents` (doc_user,date_entered, doc_stage, candidate_id, doc_name) VALUES ('"+first_name+"', '2019-12-31','" + stage + "','"+ result.insertId + "', '" + fileName +"')";
+        
 
-        //    db.query(query2, (err, reesult)=>{
-          //      if(err) return res.status(500).send(err);  
-            //    res.redirect('/');
-     
-           // });
-        });
-    },
+                db.query(query2, (err, result)=>{
+                    if(err) return res.status(500).send(err);  
+                    res.redirect('/');
+        
+                });
+            }
+            else
+            res.redirect('/');
+     });
+},
 
     editCandidatePage: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
+
         let candidateId = req.params.id;
         let query = "SELECT * FROM `candidates` WHERE serial_number = '" + candidateId + "'";
-
+        let query2 = "SELECT * from `documents` WHERE candidate_id = '" + candidateId + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
 
             if (!req.session.loggedin) return res.redirect('/login');
-            res.render('edit-candidate.ejs', {
-                title: "Edit Candidate",
-                candidate: result[0],
-                message: ''
+            
+            db.query(query2, (err, result2)=> {
+
+                if(err) return res.status(500).send(err);
+
+                res.render('edit-candidate.ejs', {
+                    title: "Edit Candidate",
+                    candidate: result[0],
+                    documents: result2,
+                    message: ''
+                })
             });
         });
     },
 
     editCandidate: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
+
         let candidateSerialNumber = req.params.id;
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
@@ -87,6 +103,8 @@ module.exports = {
     },
 
     deleteCandidate: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
+
         let candidateSerialNumber = req.params.id;
         let deleteUserQuery = 'DELETE FROM `candidates` WHERE serial_number = "' + candidateSerialNumber + '"';
 
