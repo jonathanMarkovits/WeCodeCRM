@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 
 module.exports = {
@@ -21,21 +22,33 @@ module.exports = {
         let phone_number = req.body.phone_number;
         let address = req.body.address;
         let stage = 1;
-        let file1 = req.files.file1;
-        let file2 = req.files.file2;
+        let fileType = req.body.fileType;
+        let fileName = req.body.fileName;
+        try{
+            if(req.files){
+                let file1 = req.files.file1;
+                file1.mv(`${__dirname}/uploads/${fileName}${fileType}`);
+            }
+        }
+        catch (err){
+            res.status(500).send(err);
+        }
+        
         // send the candidate details to the database
         let query = "INSERT INTO `candidates` (first_name, last_name, id, mail, gender, birthdate, phone_number, address, stage) VALUES ('" +
             first_name + "', '" + last_name + "', '" + id + "', '" + mail + "', '" + gender + "', '" + birthdate + "', '" + phone_number + "', '" + address + "', '" + stage + "')";
-        let query2 = "INSERT INTO `documents` (doc, doc_user, date_entered, doc_stage, doc_candidate) VALUES ('" +file1 + "', '"+first_name+"', '" + birthdate + "', '" + stage + "','"+ full_name + "')";
+        //let query2 = "INSERT INTO `documents` (doc, doc_user, date_entered, doc_stage, doc_candidate) VALUES ('" +file1 + "', '"+first_name+"', '" + birthdate + "', '" + stage + "','"+ full_name + "')";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            db.query(query2, (err, reesult)=>{
-                if(err) return res.status(500).send(err);  
-                res.redirect('/');
+            res.redirect('/');
+
+        //    db.query(query2, (err, reesult)=>{
+          //      if(err) return res.status(500).send(err);  
+            //    res.redirect('/');
      
-            });
+           // });
         });
     },
 
