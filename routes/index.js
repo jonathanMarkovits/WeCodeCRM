@@ -56,10 +56,28 @@ module.exports = {
 
         res.render('add-file.ejs', {
             message: '',
-            title: 'WeCode'
+            title: 'WeCode',
+            candidates: undefined
         });
     },
     
+    /**
+     *     getAddFilePage: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
+        let query = "SELECT DISTINCT first_name, last_name FROM candidate";
+        db.query(query, (err, result) => {
+            if (err) {
+                res.redirect('/');
+            }
+            res.render('add-file.ejs', {
+                message: '',
+                title: 'WeCode',
+                candidates: result
+            });
+        });
+
+    },
+     */
     addFile: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
 
