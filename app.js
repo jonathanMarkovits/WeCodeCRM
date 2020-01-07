@@ -6,9 +6,10 @@ const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
-const {getHomePage, getStage1, getStage2, getStage3, getStage4, getStage5, getStage6, getRejected} = require('./routes/index');
+const {getHomePage, getAddFilePage, addFile, getStage1, getStage2, getStage3, getStage4, getStage5, getStage6, getRejected} = require('./routes/index');
 const {addCandidatePage, addCandidate, deleteCandidate, editCandidate, editCandidatePage} = require('./routes/candidate');
 const {getLoginPage, login} = require('./routes/login');
+
 const port = 5000;
 
 // create connection to database
@@ -37,6 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 app.use(fileUpload()); // configure fileupload
+app.use(express.static(__dirname));
+
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -50,6 +53,7 @@ app.get('/stage2', getStage2);
 app.get('/stage3', getStage3);
 app.get('/stage4', getStage4);
 app.get('/stage5', getStage5);
+app.get('/addFile', getAddFilePage);
 app.get('/rejectedwithpotential', getStage6);
 app.get('/rejected', getRejected);
 app.get('/add', addCandidatePage);
@@ -59,7 +63,7 @@ app.get('/login', getLoginPage);
 app.post('/login', login);
 app.post('/add', addCandidate);
 app.post('/edit/:id', editCandidate);
-
+app.post('/addFile', addFile);
 // set the app to listen on the port
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

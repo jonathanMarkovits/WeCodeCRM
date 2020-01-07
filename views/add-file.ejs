@@ -1,0 +1,40 @@
+<%- include('partials/header.ejs') %>
+<div class="container">
+    <h3 class="text-center text-primary">Add a gfdgfdnew file</h3>
+    <% if (message != '') { %>
+    <p class="text-center text-danger"><%= message %></p>
+    <% } %>
+    <form method="POST">
+        <div align="center">
+            <table>
+                <tr>
+                    <div class="form-group col-md-4">
+                        <input type="file" class="form-control" name="file1" id="file1" placeholder="upload file" >
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" name="fileName" id="filename" placeholder="Write file name here">
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group col-md-4">
+                     <select class="form-control" name="fileType" id="fileTypeID">
+                            <option value="" disabled selected>Choose File Type</option>
+                            <option value=".pdf">PDF</option>
+                       <option value=".docx">DOCX (WORD)</option>
+                        </select>                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group col-md-4">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+</div>
+</body>
+
+</html>

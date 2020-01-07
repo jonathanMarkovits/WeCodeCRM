@@ -51,7 +51,31 @@ module.exports = {
             });
         });
     },
+    getAddFilePage: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
 
+        res.render('add-file.ejs', {
+            message: '',
+            title: 'WeCode'
+        });
+    },
+    
+    addFile: (req, res) => {
+        if (!req.session.loggedin) return res.redirect('/login');
+
+        let fileName = req.body.FileName;
+        let fileType = req.body.fileType;
+        try{
+            if(req.files){
+                let file1 = req.files.file1;
+                console.log(__dirname);
+                file1.mv(`${__dirname}/uploads/${fileName}${fileType}`);
+            }
+        }
+        catch (err){
+            res.status(500).send(err);
+        }
+    },
     getStage1: (req, res) => {
         if (!req.session.loggedin) return res.redirect('/login');
         let query = "SELECT * FROM `candidates` WHERE STAGE = 1 ORDER BY id ASC"; // query database to get all the players

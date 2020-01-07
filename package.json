@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/jonathanMarkovits/WeCodeCRM.git"
   },
-  "author": "Jonathan Markovits",
+  "author": "Jonathan Markovits, Yoav Shotland",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jonathanMarkovits/WeCodeCRM/issues"
