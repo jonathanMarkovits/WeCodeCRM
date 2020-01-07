@@ -15,22 +15,29 @@ Building a CRM app for WeCode
 
 ## node packages npm install command 
 * npm install express express-fileupload body-parser mysql ejs req-flash --save
+* if you pulled this project- you can just type npm install
+
 
 ## TDL
-* option for login page - security imporvment needed
-* all the tables in the DB should contain all fields from the section above
-* show only the information that relevant to the current stage and the next stage (in 'personal file' page)
-* show only the fields of stage 1 (in the section above) in the 'table' pages.
-* in the 'home' page, show more information like how many candidates in each stage.
-* a feature to export information to PDF.
-* a feature to send SMS (for a reminder).
-* an option to sort the table by field.
-* validting inputs for tables 
-* read about SQL engines
-* add who is the user entering the data
-* delete doc_stage column
-* consider deleting the documents table and save directly on server
+* check out about security .
 * handle input correction as it makes problems when entering chars in id at sql , for example.
+
+* yoav 
+* delete doc_stage column
+* in the 'home' page, show more information like how many candidates in each stage - add further information.
+* add documents sql creation
+* download files
+* add comments option
+* start react and css
+* a feature to export information to PDF.
+*add a format to file name so there won't be duplicates.
+
+* yonatan 
+*check about log in security features
+* a feature to send SMS (for a reminder).
+* finish up edit candidate
+* show only the information that relevant to the current stage and the next stage (in 'personal file' page)
+* show only the fields of stage 1 (in the section above) in the 'table' pages
 
 ## Remarks
 * file size is maximum 16MB
