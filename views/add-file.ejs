@@ -1,6 +1,6 @@
 <%- include('partials/header.ejs') %>
 <div class="container">
-    <h3 class="text-center text-primary">Add a new file</h3>
+    <h3 class="text-center text-primary">Add a gfdgfdnew file</h3>
     <% if (message != '') { %>
     <p class="text-center text-danger"><%= message %></p>
     <% } %>
@@ -26,17 +26,6 @@
                         </select>                    </div>
                 </tr>
                 <tr>
-                    <% if (candidates.length > 0) {%>
-
-                    <input list="users" name="user">
-                    <% candidates.forEach((candidate, index) => { %>
-                    <datalist id="users">       
-                        <% let getUser = ""+ candidate.first_name + candidate.last_name %>
-                             <option value=<%getUser%></option>>
-                            </datalist>                  
-                            <% })} %>
-                        </tr>
-                    <tr>
                     <div class="form-group col-md-4">
                         <input type="submit" class="btn btn-primary">
                     </div>

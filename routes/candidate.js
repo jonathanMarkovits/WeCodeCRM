@@ -43,7 +43,7 @@ module.exports = {
                 return res.status(500).send(err);
             }
             if(req.files) {
-                let query2 = "INSERT INTO `documents` (doc_user,date_entered, doc_stage, candidate_id, doc_name) VALUES ('"+first_name+"', '2019-12-31','" + stage + "','"+ result.insertId + "', '" + fileName +"')";
+                let query2 = "INSERT INTO `documents` (doc_user,date_entered, doc_stage, candidate_id, doc_name) VALUES ('"+first_name+"','"+ new Date().toISOString().slice(0,10)+"' ,'"+ stage + "','"+ result.insertId + "', '" + fileName +"')";
         
 
                 db.query(query2, (err, result)=>{

@@ -31,8 +31,7 @@ Building a CRM app for WeCode
 * delete doc_stage column
 * consider deleting the documents table and save directly on server
 * handle input correction as it makes problems when entering chars in id at sql , for example.
-* how to know which user is currently writing
-* notify that same name will cause problems
+
 ## Remarks
 * file size is maximum 16MB
 * comments size is maximum 500 characters.
